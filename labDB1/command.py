@@ -52,7 +52,6 @@ class Command:
         print('add    -- Add item to list')
         print('edit   -- Edit list item')
         print('delete -- Remove item from list')
-       # print('drop   -- Clear list')
         print('filt -- Filter')
         print('help   -- Print all commands')
         print('exit   -- Exiting the program')
@@ -67,7 +66,6 @@ class Command:
 
     # Add
     def add_cinema(self):
-        #cinema = self.input_and_get_cinema()  #input_and_get_cinema
         name = input('name: ')
         if not name:
             print('Invalid input!')
@@ -84,21 +82,8 @@ class Command:
             self.cinemas.insert(cinema)
             print('Added:', cinema)
 
-    # def input_and_get_cinema(self):
-    #     name = input('name: ')
-    #     if not name:
-    #         print('Invalid input!')
-    #         return
-    #     if self.cinemas.exists(name):
-    #         print('cinema already exists!')
-    #         return
-    #     city = input('City: ')
-    #     seats = input('Seats: ')
-    #
-    #     return Cinema(name, city, seats)
 
     def add_seance(self):
-        #seance = self.input_and_get_seance() # input_and_get_seance
         name = input('name: ')
         if not name:
             print('Invalid input!')
@@ -118,21 +103,6 @@ class Command:
             self.seances.insert(seance)
             print('Added:', seance)
 
-    # def input_and_get_seance(self):
-    #     name = input('name: ')
-    #     if not name:
-    #         print('Invalid input!')
-    #         return
-    #     if self.seances.exists(name):
-    #         print('seance already exists!')
-    #         return
-    #     time = input('Time: ')
-    #     cinema = input('cinema: ')
-    #     if not self.cinemas.exists(cinema):
-    #         print('cinema does not exist!')
-    #         return
-    #
-    #     return Seance(name, time,  cinema)
 
     # Edit
     def edit_cinema(self):
@@ -192,20 +162,6 @@ class Command:
         else:
             print('seance does not exist!')
 
-    # Drop
-    # def drop_cinemas(self):
-    #     check = self.ask('Delete the list (Cinemas)?')
-    #     if check:
-    #         names = self.cinemas.names()
-    #         self.seances.delete_cinemas(*names)
-    #         self.cinemas.drop()
-    #         print('Successfully deleted!')
-    #
-    # def drop_seances(self):
-    #     check = self.ask('Delete the list (Seances)?')
-    #     if check:
-    #         self.seances.drop()
-    #         print('Successfully deleted!')
 
     # Search
     def search_cinemas(self):

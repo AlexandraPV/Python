@@ -64,20 +64,6 @@ def main():
             else:
                 print('Invalid input!')
 
-        # elif str == 'drop':
-        #     Command.show_options()
-        #     print('Press 3: All')
-        #
-        #     num = input('?: ')
-        #     if num == '1':
-        #         command.drop_cinemas()
-        #     elif num == '2':
-        #         command.drop_seances()
-        #     elif num == '3':
-        #         command.drop_cinemas()
-        #         command.drop_seances()
-        #     else:
-        #         print('Invalid input!')
 
         elif str == 'filt':
             command.search_cinemas()
