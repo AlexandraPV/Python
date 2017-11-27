@@ -7,5 +7,27 @@
 <body>
 
 
+<form action="../post_form_add/" method="post">{% csrf_token %}
+    <label for="your_name" >Add new cinema: </label>
+    <input id="your_name" type="text" name="title" value="title">
+    <select name="city">
+        {% for row in city %}
+          {% for i in row %}
+        <option value="{{i}}">{{i}}</option>
+        {% endfor %}
+        {% endfor %}
+    <input min=0 id="seats" type="number" name="seats" value="seats">
+    <select name="seance">
+        {% for row in sean %}
+          {% for i in row %}
+        <option value="{{i}}">{{i}}</option>
+        {% endfor %}
+        {% endfor %}
+</select>
+
+    <input type="submit" value="OK">
+</form>
+
+
 </body>
 </html>
