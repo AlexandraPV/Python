@@ -15,10 +15,10 @@ def show_table():
 
     list_new2 = []
     for i in list:
-        cursor.execute("""SELECT name_c FROM testdb.city WHERE id=%s""", i[1])
+        cursor.execute("""SELECT name_c FROM testdb.city WHERE id=%s""", i[2])
         p = cursor.fetchall()
 
-        cursor.execute("""SELECT name_s FROM testdb.seance WHERE id=%s""", i[3])
+        cursor.execute("""SELECT name_s FROM testdb.seance WHERE id=%s""", i[4])
         se = cursor.fetchall()
 
         list_new = []
@@ -27,10 +27,10 @@ def show_table():
         #print(list_new)
         for g1 in p:
             for g2 in g1:
-                list_new[1] = g2
+                list_new[2] = g2
         for se1 in se:
             for se2 in se1:
-                list_new[3] = se2
+                list_new[4] = se2
         #print(list_new)
         list_new2.append(list_new)
     return list_new2
@@ -94,17 +94,10 @@ def write(request):
 def delete(request):
     if request.method == "POST":
         val = request.POST['val']
-        print("val--------")
-        print(val)
-        print("---------val")
-
         s=val.replace("[", "")
         s = s.replace("]", "")
-        print(s)
         mas = s.split(',')
-        print(mas[0])
-    #path=request.path
-    #print(path)
+
     cursor = connection.cursor()
     id=mas[0]
     cursor.execute("""DELETE FROM `testdb`.`cinema_app_cinema` WHERE `id`=%s""", id)
@@ -112,10 +105,65 @@ def delete(request):
     #return render(request, "index.html", {})
 
 def update(request):
-    return render(request, "index.html", {})
+    if request.method == "POST":
+        val = request.POST['val']
+        s = val.replace("[", "")
+        s = s.replace("]", "")
+        mas = s.split(',')
+        id = mas[0].replace("'", "")
+        id = id.replace("'", "")
+        title=mas[1].replace("'", "")
+        title = title.replace(" ", "")
+        city_n=mas[2].replace("'", "")
+        city_n = city_n.replace(" ", "")
+        seats=mas[3].replace("'", "")
+        seats = seats.replace(" ", "")
+        print(seats)
+        seance_n = mas[4].replace("'", "")
+        seance_n = seance_n.replace(" ", "")
+        list_new_city = []
+        print(city_n)
+        cursor = connection.cursor()
+        city_n=str(city_n)
+        seance_n=str(seance_n)
+        cursor.execute("""SELECT name_c FROM testdb.city WHERE NOT name_c = %s""", city_n)
+        city = cursor.fetchall()
+        print(city)
+
+        cursor.execute("""SELECT name_s FROM testdb.seance WHERE NOT name_s = %s""", seance_n)
+        sean = cursor.fetchall()
+        print(sean)
+
+        list = show_table()
+        print("id--------")
+        print(id)
+    return render(request, "update.html", {'id':id, 'title':title, 'city_n':city_n, 'seats':seats, 'seance_n':seance_n, 'list':list, 'sean' : sean, 'city' : city})
 
 
+def list_city():
+    cursor = connection.cursor()
+    cursor.execute("""SELECT name_c FROM testdb.city""")
+    city = cursor.fetchall()
+    # print(city)
+    # for i in city:
+    #     for g in i:
+    #         print(g)
+    #     print(i)
 
+    return city
+
+
+def list_seance():
+    cursor = connection.cursor()
+    cursor.execute("""SELECT name_s FROM testdb.seance""")
+    sean = cursor.fetchall()
+    # print(sean)
+    # for i in sean:
+    #     for g in i:
+    #         print(g)
+    #     print(i)
+
+    return sean
 
 def add(request):
     cursor = connection.cursor()
@@ -136,9 +184,7 @@ def add(request):
         for g in i:
             print(g)
         print(i)
-    #cursor.execute("""INSERT INTO `testdb`.`cinema_app_cinema` ( `city_id`, `seats`, `title`, `seance_id` ) VALUES ( %s, 'hj', 'jhbfj', %s)""", (imc, im))
-    #cursor.execute("""SELECT city_id, seats, title, seance_id FROM testdb.cinema_app_cinema """)
-    #r1 = cursor.fetchall()
+
     return render(request, "add.html", {'sean' : sean, 'city' : city})
 
 def post_form_add(request):
@@ -148,7 +194,7 @@ def post_form_add(request):
         title  = request.POST['title']
         cursor.execute("""SELECT id FROM testdb.seance WHERE name_s = %s""", request.POST['seance'])
         seance_id = cursor.fetchall()
-        print(seance_id)
+
         for i in seance_id:
             for g in i:
                 print(g)
@@ -164,9 +210,39 @@ def post_form_add(request):
 
         seats = request.POST['seats']
         cursor.execute("""INSERT INTO `testdb`.`cinema_app_cinema` ( `city_id`, `seats`, `title`, `seance_id`) VALUES ( %s, %s, %s, %s)""", (city_id, seats, title, seance_id))
+    print("!!!!!!!!")
+    #return render(request, "index.html", {})
+    return redirect("/")
 
-        print(title)
-        print(seats)
-        print(seance_id)
+def post_form_update(request):
+    cursor = connection.cursor()
+
+    if request.method == "POST":
+        title  = request.POST['title']
+        id = request.POST['id']
+        print("______id!!!!!!!!")
+        print(id)
+        cursor.execute("""SELECT id FROM testdb.seance WHERE name_s = %s""", request.POST['seance'])
+        seance_id = cursor.fetchall()
+
+        for i in seance_id:
+            for g in i:
+                print(g)
+                seance_id = g
+
+        cursor.execute("""SELECT id FROM testdb.city WHERE name_c = %s""", request.POST['city'])
+        city_id = cursor.fetchall()
+
+        for i in city_id:
+            for g in i:
+                print(g)
+                city_id = g
+
+
+        seats = request.POST['seats']
+        #cursor.execute("""INSERT INTO `testdb`.`cinema_app_cinema` ( `city_id`, `seats`, `title`, `seance_id`) VALUES ( %s, %s, %s, %s)""", (city_id, seats, title, seance_id))
+        cursor.execute("""UPDATE `testdb`.`cinema_app_cinema` SET `title`=%s, `city_id`=%s, `seats`=%s, `seance_id`=%s WHERE `id`= %s""", (title, city_id, seats, seance_id, id))
+
+
     #return render(request, "index.html", {})
     return redirect("/")

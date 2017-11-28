@@ -21,7 +21,8 @@
  <div class="form-group">
   <label for="city">City</label>
      <select name="city" class="form-control" id="city">
-        {% for row in city %}
+
+         {% for row in city %}
           {% for i in row %}
         <option value="{{i}}">{{i}}</option>
         {% endfor %}

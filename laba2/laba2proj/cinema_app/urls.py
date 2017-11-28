@@ -8,4 +8,5 @@ urlpatterns = [
     url(r'^update/$', views.update),
     url(r'^add/$', views.add),
     url(r'^post_form_add/$', views.post_form_add),
+    url(r'^post_form_update/$', views.post_form_update),
 ]
