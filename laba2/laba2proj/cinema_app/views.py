@@ -7,11 +7,11 @@ from django.db import connection
 
 
 # Create your views here.
-def show(request):
+def show_table():
     cursor = connection.cursor()
-    cursor.execute("""SELECT title, city_id, seats, seance_id FROM testdb.cinema_app_cinema""")
+    cursor.execute("""SELECT id, title, city_id, seats, seance_id FROM testdb.cinema_app_cinema""")
     list = cursor.fetchall()
-    print(list)
+    #print(list)
 
     list_new2 = []
     for i in list:
@@ -24,16 +24,36 @@ def show(request):
         list_new = []
         for el in i:
             list_new.append(el)
-        print(list_new)
+        #print(list_new)
         for g1 in p:
             for g2 in g1:
-                list_new[1]=g2
+                list_new[1] = g2
         for se1 in se:
             for se2 in se1:
-                list_new[3]=se2
-        print(list_new)
+                list_new[3] = se2
+        #print(list_new)
         list_new2.append(list_new)
-    return render(request, "index.html", {'list':list_new2})
+    return list_new2
+
+def get_list_title():
+    list_new2 = show_table()
+    list_tit = []
+    for g1 in list_new2:
+        list_tit.append(g1[0])
+        # print("g1----")
+        # print(g1[0])
+        # print("--------g1")
+
+    #print(list_tit)
+    return list_tit
+
+def show(request):
+    list_new2 = show_table()
+    list_title = get_list_title()
+    # print("list_title----")
+    # print(list_title)
+    # print("--------list_title")
+    return render(request, "index.html", {'list':list_new2, 'list_title':list_title})
 
 def write(request):
 
@@ -52,8 +72,8 @@ def write(request):
 
        for row in reader:
            print(row)
-           cursor.execute("""INSERT INTO `testdb`.`seance` ( `name_s`, `time`) VALUES ( %s, %s)""",
-                          (row['name_s'], row['time']))
+           cursor.execute("""INSERT INTO `testdb`.`seance` ( `name_s`, `time`, `show`, `about`) VALUES ( %s, %s, %s, %s)""",
+                          (row['name_s'], row['time'], row['show'], row['about']))
 
            #cursor.execute("""INSERT INTO `testdb`.`cinema_app_cinema` ( `city`, `seats`, `title`) VALUES ( %s, %s, %s)""", (row['city'], row['seats'], row['title']))
 
@@ -66,16 +86,30 @@ def write(request):
        for row in reader1:
            print(row)
            cursor.execute("""INSERT INTO `testdb`.`city` ( `name_c`, `country`) VALUES ( %s, %s)""", (row['name_c'], row['country']))
-
-   # return render(request, "index.html", {'b': b})
-    return redirect("/")
+           result = "seance.csv and city.csv files were written to DB"
+    list = show_table()
+    return render(request, "result.html", {'result': result, 'list': list})
+    #return redirect("/")
 
 def delete(request):
-    cursor = connection.cursor()
-    id=3
-    cursor.execute("""DELETE FROM `testdb`.`cinema_app_cinema` WHERE `id`=%s""", id)
+    if request.method == "POST":
+        val = request.POST['val']
+        print("val--------")
+        print(val)
+        print("---------val")
 
-    return render(request, "index.html", {})
+        s=val.replace("[", "")
+        s = s.replace("]", "")
+        print(s)
+        mas = s.split(',')
+        print(mas[0])
+    #path=request.path
+    #print(path)
+    cursor = connection.cursor()
+    id=mas[0]
+    cursor.execute("""DELETE FROM `testdb`.`cinema_app_cinema` WHERE `id`=%s""", id)
+    return redirect("/")
+    #return render(request, "index.html", {})
 
 def update(request):
     return render(request, "index.html", {})

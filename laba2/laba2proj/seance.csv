@@ -1,4 +1,4 @@
-name_s,time
-Film1,18
-Film2,20
-Film3,30
+name_s,time,show,about
+Film1,18,False,text text text
+Film2,20,False,text text text
+Film3,30,True,text text text

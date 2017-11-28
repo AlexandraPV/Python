@@ -9,34 +9,120 @@
    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-<div class="col-md-10 col-sm-10 col-xs-10>
-    <a href="../write" >Write from csv to DB</a>
-    <br>
-    <a href="../delete" >Delete from DB</a>
-    <br>
-    <a href="../add" >Add to DB</a>
-    <br>
-    <a href="../update" >Update DB</a>
-    <br>
-    </div>
-<div class="col-md-10 col-sm-10 col-xs-10">
- <table class="table table-hover" style="margin:10px">
-   <tr>
-       <th>Title</th>
-       <th>City</th>
-       <th>Seats</th>
-       <th>Seance</th>
-   </tr>
-{% for row in list %}
-     <tr>
-          {% for i in row %}
-        <td>{{i}}</td>
-         {% endfor %}
-  </tr>
 
-        {% endfor %}
- </table>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-7 " style="">
+
+            <table class="table table-hover " style="margin:30px">
+                   <tr>
+                       <thead>
+                       <th>Id</th>
+                       <th>Title</th>
+                       <th>City</th>
+                       <th>Seats</th>
+                       <th>Seance</th>
+                       <th></th>
+                       <th></th>
+
+                       </thead>
+                   </tr>
+
+                {% for row in list %}
+
+                     <tr>
+
+                          {% for i in row %}
+                        <td>{{i}}</td>
+                         {% endfor %}
+              <td><form action="../update/" method="post" role="form" >{% csrf_token %}
+                  <input name="val" type="hidden" value="{{row}}">
+               <button type="submit" class="glyphicon glyphicon-ok"></button>
+              </form>
+        </td>
+                         <td><form action="../delete/" method="post" role="form" >{% csrf_token %}
+                  <input name="val" type="hidden" value="{{row}}">
+               <button type="submit" class="glyphicon glyphicon-remove"></button>
+              </form></td>
+                        {% endfor %}
+
+                 </table>
+
+<!--<div class="col-md-2 ">-->
+            <!--<table class="table table-hover " style="margin:0px">-->
+                   <!--<tr>-->
+                       <!--<thead>-->
+                       <!--<th> &nbsp; </th>-->
+                       <!--<th> &nbsp; </th>-->
+                       <!--</thead>-->
+                   <!--</tr>-->
+                   <!--<tr>-->
+
+                       <!--<th> &nbsp; </th>-->
+                       <!--<th> &nbsp; </th>-->
+
+                   <!--</tr>-->
+                  <!--{% for g in list_title %}-->
+                <!--<tr>-->
+
+                      <!--<td><a href="update/{{g}}">-->
+          <!--<span class="glyphicon glyphicon-ok"></span>-->
+        <!--</a></td>-->
+                         <!--<td><a href="delete/{{g}}">-->
+          <!--<span class="glyphicon glyphicon-remove"></span>-->
+        <!--</a></td>-->
+                    <!--</tr>-->
+                  <!--{% endfor %}-->
+
+
+                 <!--</table>-->
+    <!--</div>-->
+        </div>
+
+        <div class="col-md-2 my_div_bt" >
+                 <a class = "btn btn-primary my_bt" href="../write" >Write from csv to DB</a>
+                 {% block result %}
+                     {% endblock %}
+                <a  class = "btn btn-primary my_bt" href="../delete" >Delete from DB</a>
+                <a  class = "btn btn-primary my_bt" href="../add" >Add to DB</a>
+                <a class = "btn btn-primary my_bt" href="../update" >Update DB</a>
+        </div>
+
+    </div>
 </div>
+
+<style>
+    .my_bt{
+     margin-top:5%;
+    }
+
+    .my_div_bt{
+     margin-left:5%;
+     margin-top:2%;
+    }
+    p.res{
+    color:#828282;
+    }
+    .glyphicon-ok{
+    color:green;
+    }
+    .glyphicon-remove{
+    color:#d30a0a;
+    }
+    .glyphicon-remove:hover{
+    color:#7c0404;
+    }
+    .glyphicon-ok:hover{
+    color:#195e19;
+    }
+    a.btn{
+     width:200px;
+       }
+</style>
+
+
+
+
 
 
 </body>

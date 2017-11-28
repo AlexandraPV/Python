@@ -3,31 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
 
+<div class="col-md-6 col-sm-6 col-xs-6" style="margin:20px">
 
-<form action="../post_form_add/" method="post">{% csrf_token %}
-    <label for="your_name" >Add new cinema: </label>
-    <input id="your_name" type="text" name="title" value="title">
-    <select name="city">
+<form action="../post_form_add/" method="post" role="form" >{% csrf_token %}
+    <h1>Add new cinema:</h1>
+    <br>
+ <div class="form-group">
+  <label for="title">Title</label>
+     <input id="title" class="form-control" type="text" name="title" value="" placeholder="Enter title" required>
+ </div>
+ <div class="form-group">
+  <label for="city">City</label>
+     <select name="city" class="form-control" id="city">
         {% for row in city %}
           {% for i in row %}
         <option value="{{i}}">{{i}}</option>
         {% endfor %}
         {% endfor %}
-    <input min=0 id="seats" type="number" name="seats" value="seats">
-    <select name="seance">
+         </select>
+ </div>
+   <div class="form-group">
+  <label for="seats">Seats</label>
+         <input min=0 id="seats" type="number" name="seats" value="" class="form-control" placeholder="Enter count of seats" required>
+ </div>
+ <div class="form-group">
+  <label for="seance">Seance</label>
+     <select name="seance" class="form-control" id="seance">
         {% for row in sean %}
           {% for i in row %}
         <option value="{{i}}">{{i}}</option>
         {% endfor %}
         {% endfor %}
 </select>
-
-    <input type="submit" value="OK">
+ </div>
+ <button type="submit" class="btn btn-success">Add new cinema</button>
 </form>
 
+
+
+     <a href="/" class="btn  btn-lg back_btn">
+          <span class="glyphicon glyphicon-chevron-left"></span>Back</a>
+</div>
+
+<style>
+    .back_btn{
+     margin-top:20%;
+     bacground-color: #fff !important;
+     color: #828282;
+     border-color: #828282;
+    }
+    .back_btn:hover{
+     border-color: #2d2d2d;
+     color: #2d2d2d;
+    }
+</style>
 
 </body>
 </html>
