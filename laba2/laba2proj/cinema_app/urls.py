@@ -11,5 +11,7 @@ urlpatterns = [
     url(r'^search_city/$', views.search_city),
     url(r'^search_seance/$', views.search_seance),
     url(r'^post_form_update/$', views.post_form_update),
+    url(r'^post_form_search_bm/$', views.post_form_search_bm),
     url(r'^search/$', views.search),
+    url(r'^search_bm/$', views.search_bm),
 ]

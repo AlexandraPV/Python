@@ -320,6 +320,7 @@ def search_city(request):
         name_c = request.POST['name_c']
         country = request.POST['country']
         list_city2=[]
+        list_city = []
         if name_c=="0" and country=="0":
             return redirect("../search")
         elif name_c != "0" and country=="0":
@@ -332,6 +333,7 @@ def search_city(request):
             cursor.execute("""SELECT * FROM testdb.city WHERE country = %s AND name_c = %s""", (country, name_c))
             list_city = cursor.fetchall()
 
+
         for i in list_city:
 
             list_new = []
@@ -340,7 +342,7 @@ def search_city(request):
 
             list_city2.append(list_new)
 
-            city = list_city2
+        city = list_city2
     #return redirect("../search")
     return render(request, "search.html", {'city': city, 'list': list_new2, 'list_title': list_title,'seance_time_list':list_new_time_seance, 'sean':sean, 'seance_name_list':list_new_name_seance,'city_name_list':list_new_name_city, 'list_new_country_city': list_new_country_city})
 
@@ -412,8 +414,12 @@ def search_seance(request):
             cursor.execute("""SELECT * FROM testdb.seance WHERE show_n = %s AND time = %s""", (show, time))
             list_sean = cursor.fetchall()
 
+        elif name_s != "0" and show == "0" and time != "0":
+            cursor.execute("""SELECT * FROM testdb.seance WHERE name_s = %s AND time = %s""", (name_s, time))
+            list_sean = cursor.fetchall()
+
         elif show != "0" and name_s != "0" and time != "0":
-            cursor.execute("""SELECT * FROM testdb.seance WHERE show_n = %s AND name_s = %s AND time =%s""", (show, name_s, time))
+            cursor.execute("""SELECT * FROM testdb.seance WHERE show_n = %s AND name_s = %s AND time = %s""", (show, name_s, time))
             list_sean = cursor.fetchall()
 
 
@@ -429,3 +435,41 @@ def search_seance(request):
         sean = list_sean2
     #return redirect("../search")
     return render(request, "search.html", {'sean': sean, 'list': list_new2, 'list_title': list_title, 'city':city, 'seance_name_list':list_new_name_seance, 'seance_time_list':list_new_time_seance, 'city_name_list':list_new_name_city, 'list_new_country_city': list_new_country_city})
+
+
+def search_bm(request):
+    sean = list_seance_all()
+    return render(request, "search_bm.html",{'sean':sean})
+
+def post_form_search_bm(request):
+    #sean = list_seance_all()
+    sean=[]
+    cursor = connection.cursor()
+    if request.method == "POST":
+        text_excluded = request.POST['text_excluded']
+        text_included = request.POST['text_included']
+        print("text_excluded")
+        print(text_excluded)
+        print("text_included")
+        print(text_included)
+        if text_excluded=="" and text_included=="":
+            return redirect("../search_bm")
+        elif text_excluded!="" and text_included=="":
+            text =  text_excluded
+            print(text)
+            cursor.execute("""SELECT * FROM testdb.seance WHERE  NOT MATCH (name_s,about)
+                AGAINST (%s IN BOOLEAN MODE)""", text)
+            sean = cursor.fetchall()
+            print(sean)
+        elif text_excluded=="" and text_included!="":
+            text = "+" + text_included
+            cursor.execute("""SELECT * FROM testdb.seance WHERE MATCH (name_s,about)
+                           AGAINST (%s IN BOOLEAN MODE)""", text)
+            sean = cursor.fetchall()
+        elif text_excluded!="" and text_included!="":
+            text = "+" + text_included + " -" + text_excluded
+            cursor.execute("""SELECT * FROM testdb.seance WHERE MATCH (name_s,about)
+                           AGAINST (%s IN BOOLEAN MODE)""", text)
+            sean = cursor.fetchall()
+
+    return render(request, "search_bm.html", {'sean': sean})

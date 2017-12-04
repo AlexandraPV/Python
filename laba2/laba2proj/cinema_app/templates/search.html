@@ -70,7 +70,7 @@
         <div class="col-md-7 " style="">
         <h2 style="margin:30px">Seance table:</h2>
             <form action="../search_seance/" method="post" role="form" >{% csrf_token %}
-            <div class="col-md-3 col-md-push-1" style="margin-bottom: 15px; margin-left: 20px;">
+            <div class="col-md-3 col-md-push-0" style="margin-bottom: 15px; margin-left: 20px;">
             <label for="name_s">Name_seance</label>
      <select name="name_s" class="form-control" id="name_s">
        <option value="0">------</option>
@@ -81,7 +81,7 @@
         {% endfor %}
          </select>
            </div>
-                <div class="col-md-2 col-md-push-2" style="margin-bottom: 15px; margin-left: -20px;">
+                <div class="col-md-3 col-md-push-1" style="margin-bottom: 15px; margin-left: 0px;">
         <label for="time">Time</label>
          <select name="time" class="form-control" id="time">
          <option value="0">------</option>
@@ -101,7 +101,7 @@
      </select>
            </div>
 
-                <div class="col-md-3 col-md-push-4 " style="margin-top: 25px !important;">
+                <div class="col-md-3 col-md-push-3 " style="margin-top: 25px !important;margin-left: -20px;">
                <button type="submit" class="btn btn-success">Search</button>
                 </div>
            </form>

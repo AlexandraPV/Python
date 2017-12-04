@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <title>Title</title>
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container-fluid">
+    <div class="row">
+
+
+
+
+        <div class="col-md-7 " style="">
+         <h2 style="margin:30px">Search in BOOLEAN MODE format:</h2>
+        <h3 style="margin:30px">Seance table:</h3>
+            <form action="../post_form_search_bm/" method="post" role="form" >{% csrf_token %}
+
+                <div class="col-md-4 col-md-push-1" style="margin-bottom: 15px; margin-left: -20px;">
+        <label for="text_excluded">Word excluded</label>
+         <input id="text_excluded" class="form-control" type="text" name="text_excluded" value="" placeholder="Enter word">
+           </div>
+<div class="col-md-4 col-md-push-2" style="margin-bottom: 15px; margin-left: -20px;">
+        <label for="text_included">Word included</label>
+         <input id="text_included" class="form-control" type="text" name="text_included" value="" placeholder="Enter word">
+           </div>
+
+                <div class="col-md-3 col-md-push-3 " style="margin-top: 25px !important;">
+               <button type="submit" class="btn btn-success">Search</button>
+                </div>
+           </form>
+
+
+            <table class="table table-hover " style="margin:30px">
+                   <tr>
+                       <thead>
+                       <th>Id</th>
+                       <th>Name_seance</th>
+                       <th>Time</th>
+                       <th>Show</th>
+                       <th>About</th>
+
+                       </thead>
+                   </tr>
+
+                {% for row in sean %}
+
+                     <tr>
+
+                          {% for i in row %}
+                        <td>{{i}}</td>
+                         {% endfor %}
+
+</tr>
+                {% endfor %}
+                 </table>
+
+
+        </div>
+
+        <div class="col-md-2 my_div_bt" >
+
+        </div>
+
+    </div>
+    <div class="col-md-3 col-sm-3 col-xs-3" style="margin:0px">
+<a href="/" class="btn  btn-lg back_btn">
+          <span class="glyphicon glyphicon-chevron-left"></span>Back</a>
+    </div>
+</div>
+{% block update %}
+  {% endblock %}
+<style>
+    .my_bt{
+     margin-top:5%;
+    }
+
+    .my_div_bt{
+     margin-left:5%;
+     margin-top:2%;
+    }
+    p.res{
+    color:#828282;
+    }
+    .glyphicon-ok{
+    color:green;
+    }
+    .glyphicon-pencil{
+    color: #5c8dbc;
+    }
+    .glyphicon-pencil:hover{
+    color: #345b82;
+    }
+    .glyphicon-remove{
+    color:#d30a0a;
+    }
+    .glyphicon-remove:hover{
+    color:#7c0404;
+    }
+    .glyphicon-ok:hover{
+    color:#195e19;
+    }
+
+        .back_btn{
+     margin-top:5%;
+     bacground-color: #fff !important;
+     color: #828282;
+     border-color: #828282;
+    }
+    .back_btn:hover{
+     border-color: #2d2d2d;
+     color: #2d2d2d;
+    }
+</style>
+
+
+
+
+
+</body>
+</html>
