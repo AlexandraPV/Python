@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <title>Title</title>
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="col-md-7 " style="">
+           <h2 style="margin:30px">City table:</h2>
+           <form action="../search_city/" method="post" role="form" >{% csrf_token %}
+            <div class="col-md-3 col-md-push-2" style="margin-bottom: 15px;">
+            <label for="name_c">Name_city</label>
+     <select name="name_c" class="form-control" id="name_c">
+<option value="0">------</option>
+        {% for row in city_name_list %}
+
+        <option value="{{row}}">{{row}}</option>
+
+        {% endfor %}
+         </select>
+           </div>
+            <div class="col-md-3 col-md-push-4 " style="margin-bottom: 15px;">
+            <label for="country">Country</label>
+     <select name="country" class="form-control" id="country">
+<option value="0">------</option>
+         {% for row in list_new_country_city %}
+
+        <option value="{{row}}">{{row}}</option>
+
+        {% endfor %}
+         </select>
+            </div>
+                <div class="col-md-3 col-md-push-5 " style="margin-top: 25px !important;">
+               <button type="submit" class="btn btn-success">Search</button>
+                </div>
+           </form>
+            <table class="table table-hover " style="margin:30px">
+                   <tr>
+                       <thead>
+                       <th>Id</th>
+                       <th>Name_city</th>
+                       <th>Country</th>
+                       </thead>
+                   </tr>
+
+                {% for row in city %}
+
+                     <tr>
+
+                          {% for i in row %}
+                        <td>{{i}}</td>
+                         {% endfor %}
+
+</tr>
+                {% endfor %}
+                 </table>
+
+
+        </div>
+
+
+        <div class="col-md-7 " style="">
+        <h2 style="margin:30px">Seance table:</h2>
+            <form action="../search_seance/" method="post" role="form" >{% csrf_token %}
+            <div class="col-md-3 col-md-push-1" style="margin-bottom: 15px; margin-left: 20px;">
+            <label for="name_s">Name_seance</label>
+     <select name="name_s" class="form-control" id="name_s">
+       <option value="0">------</option>
+         {% for row in seance_name_list %}
+
+        <option value="{{row}}">{{row}}</option>
+
+        {% endfor %}
+         </select>
+           </div>
+                <div class="col-md-2 col-md-push-2" style="margin-bottom: 15px; margin-left: -20px;">
+        <label for="time">Time</label>
+         <select name="time" class="form-control" id="time">
+         <option value="0">------</option>
+         {% for row in seance_time_list %}
+
+        <option value="{{row}}">{{row}}</option>
+
+        {% endfor %}
+         </select>
+           </div>
+                <div class="col-md-2 col-md-push-2" style="margin-bottom: 15px;margin-left: -5px;">
+            <label for="show">Show</label>
+     <select name="show" class="form-control" id="show">
+         <option value="0">------</option>
+         <option value="True">True</option>
+         <option value="False">False</option>
+     </select>
+           </div>
+
+                <div class="col-md-3 col-md-push-4 " style="margin-top: 25px !important;">
+               <button type="submit" class="btn btn-success">Search</button>
+                </div>
+           </form>
+            <table class="table table-hover " style="margin:30px">
+                   <tr>
+                       <thead>
+                       <th>Id</th>
+                       <th>Name_seance</th>
+                       <th>Time</th>
+                       <th>Show</th>
+                       <th>About</th>
+
+                       </thead>
+                   </tr>
+
+                {% for row in sean %}
+
+                     <tr>
+
+                          {% for i in row %}
+                        <td>{{i}}</td>
+                         {% endfor %}
+
+</tr>
+                {% endfor %}
+                 </table>
+
+
+        </div>
+
+        <div class="col-md-2 my_div_bt" >
+
+        </div>
+
+    </div>
+    <div class="col-md-3 col-sm-3 col-xs-3" style="margin:0px">
+<a href="/" class="btn  btn-lg back_btn">
+          <span class="glyphicon glyphicon-chevron-left"></span>Back</a>
+    </div>
+</div>
+{% block update %}
+  {% endblock %}
+<style>
+    .my_bt{
+     margin-top:5%;
+    }
+
+    .my_div_bt{
+     margin-left:5%;
+     margin-top:2%;
+    }
+    p.res{
+    color:#828282;
+    }
+    .glyphicon-ok{
+    color:green;
+    }
+    .glyphicon-pencil{
+    color: #5c8dbc;
+    }
+    .glyphicon-pencil:hover{
+    color: #345b82;
+    }
+    .glyphicon-remove{
+    color:#d30a0a;
+    }
+    .glyphicon-remove:hover{
+    color:#7c0404;
+    }
+    .glyphicon-ok:hover{
+    color:#195e19;
+    }
+
+        .back_btn{
+     margin-top:5%;
+     bacground-color: #fff !important;
+     color: #828282;
+     border-color: #828282;
+    }
+    .back_btn:hover{
+     border-color: #2d2d2d;
+     color: #2d2d2d;
+    }
+</style>
+
+
+
+
+
+</body>
+</html>
