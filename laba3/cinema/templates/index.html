@@ -1,0 +1,116 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <title>Title</title>
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="col-md-7 " style="">
+         <h2 style="margin:30px">Cinema table:</h2>
+            <table class="table table-hover " style="margin:30px">
+                   <tr>
+                       <thead>
+                       <th>Id</th>
+                       <th>Title</th>
+                       <th>City</th>
+                       <th>Seats</th>
+                       <th>Seance</th>
+                       <th></th>
+                       <th></th>
+
+                       </thead>
+                   </tr>
+
+               {% for elem in cinema_all%}
+
+                     <tr>
+                         <td>{{elem.id}}</td>
+                         <td>{{elem.title}}</td>
+                          <td>{{elem.city}}</td>
+                          <td>{{elem.seats}}</td>
+                          <td>{{elem.seance}}</td>
+
+
+              <td><form action="../update/" method="post" role="form" >{% csrf_token %}
+                  <input name="val" type="hidden" value="{{elem.id}}">
+               <button type="submit" class="glyphicon glyphicon-pencil"></button>
+              </form>
+        </td>
+                         <td><form action="../delete/" method="post" role="form" >{% csrf_token %}
+                  <input name="val" type="hidden" value="{{elem.id}}">
+               <button type="submit" class="glyphicon glyphicon-remove"></button>
+              </form></td>
+                        {% endfor %}
+</tr>
+                 </table>
+
+
+        </div>
+
+        <div class="col-md-2 my_div_bt" >
+                 <!--<a class = "btn btn-primary my_bt" href="../write" >Write from csv to DB</a>-->
+                 <!--{% block result %}-->
+                     <!--{% endblock %}-->
+                <a  class = "btn btn-primary my_bt" href="../add" >Add to DB</a>
+                <a  class = "btn btn-primary my_bt" href="../search" >Search</a>
+                <a  class = "btn btn-primary my_bt" href="../kp_3" >KP-3</a>
+                <!--<a  class = "btn btn-primary my_bt" href="../search_bm" >Search by Boolean Mode</a>-->
+        </div>
+
+    </div>
+
+</div>
+{% block update %}
+  {% endblock %}
+<style>
+    .my_bt{
+     margin-top:5%;
+    }
+
+    .my_div_bt{
+     margin-left:5%;
+     margin-top:2%;
+    }
+    p.res{
+    color:#828282;
+    }
+    .glyphicon-ok{
+    color:green;
+    }
+    .glyphicon-pencil{
+    color: #5c8dbc;
+    }
+    .glyphicon-pencil:hover{
+    color: #345b82;
+    }
+    .glyphicon-remove{
+    color:#d30a0a;
+    }
+    .glyphicon-remove:hover{
+    color:#7c0404;
+    }
+    .glyphicon-ok:hover{
+    color:#195e19;
+    }
+    a.btn{
+     width:200px;
+       }
+</style>
+
+
+
+
+
+
+</body>
+</html>

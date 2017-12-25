@@ -1,0 +1,46 @@
+{% extends 'index.html' %}
+
+
+{% block update %}
+
+<div class="col-md-6 col-sm-6 col-xs-6" style="margin-left:30px">
+
+<form action="../post_form_update/" method="post" role="form" >{% csrf_token %}
+    <h2>Update cinema:</h2>
+    <br>
+    <input hidden id="id" name="id" value="{{current_cinema.id}}" >
+ <div class="form-group">
+  <label for="title">Title</label>
+     <input id="title" class="form-control" type="text" name="title" value="{{current_cinema.title}}" required>
+ </div>
+ <div class="form-group">
+  <label for="city">City</label>
+     <select name="city" class="form-control" id="city">
+         <option value="{{current_cinema.city.id}}" selected>{{current_cinema.city}}</option>
+        {% for row in city_all %}
+
+        <option value="{{row.id}}">{{row.name}}</option>
+
+        {% endfor %}
+         </select>
+ </div>
+   <div class="form-group">
+  <label for="seats">Seats</label>
+         <input min=0 id="seats" type="number" name="seats" value="{{current_cinema.seats}}" class="form-control"  required>
+ </div>
+ <div class="form-group">
+  <label for="seance">Seance</label>
+     <select name="seance" class="form-control" id="seance">
+        <option value="{{current_cinema.seance.id}}" selected>{{current_cinema.seance}}</option>
+         {% for row in seance_all %}
+
+        <option value="{{row.id}}">{{row.name}}</option>
+
+        {% endfor %}
+</select>
+ </div>
+ <button type="submit" class="btn btn-success">Update cinema</button>
+</form>
+
+</div>
+{% endblock %}

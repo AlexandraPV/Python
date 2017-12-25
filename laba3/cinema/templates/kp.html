@@ -1,0 +1,238 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <title>Title</title>
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container-fluid">
+    <div class="row">
+       <div class="col-md-2 " style="margin-left:30px;">
+           <h2 style="margin-left:50%; margin-top:30px">1</h2>
+       <p style="margin-left:30px; margin-top:30px">Вивести список кінотеатрів відсортурувавши їх за часом показу сеанса ( тобто назви кінотетрів за розкладом сеансів)</p>
+           <table class="table table-hover " style="margin:30px">
+               <tr>
+                   <thead>
+                   <th>ID</th>
+                   <th>Title</th>
+                   <th>Seats</th>
+               </tr>
+                    {% for row in find_1 %}
+
+                     <tr>
+
+                          {% for i in row %}
+                        <td>{{i}}</td>
+                         {% endfor %}
+
+
+               </tr>
+               {% endfor %}
+           </table>
+       </div>
+
+        <div class="col-md-2 " style="margin-left:50px;">
+            <h2 style="margin-left:50%; margin-top:30px">2</h2>
+       <p style="margin-left:30px; margin-top:30px">Вивести кінотеатри в яких показуються сеанси (діючі)</p>
+           <table class="table table-hover " style="margin:30px">
+               <tr>
+                   <thead>
+                   <th>ID</th>
+                   <th>Title</th>
+                   <th>Seats</th>
+               </tr>
+                    {% for row in find_2 %}
+
+                     <tr>
+
+                          {% for i in row %}
+                        <td>{{i}}</td>
+                         {% endfor %}
+
+
+               </tr>
+               {% endfor %}
+           </table>
+       </div>
+
+            <div class="col-md-2 " style="margin-left:50px;">
+                <h2 style="margin-left:50%; margin-top:30px">3</h2>
+       <p style="margin-left:30px; margin-top:30px">Вивести кінотеатрі, що розташовані у Ukraine</p>
+           <table class="table table-hover " style="margin:30px">
+               <tr>
+                   <thead>
+                   <th>ID</th>
+                   <th>Title</th>
+                   <th>Seats</th>
+               </tr>
+                    {% for row in find_3 %}
+
+                     <tr>
+
+                          {% for i in row %}
+                        <td>{{i}}</td>
+                         {% endfor %}
+
+
+               </tr>
+               {% endfor %}
+           </table>
+       </div>
+
+          <div class="col-md-3 " style="margin-left:50px;">
+                <h2 style="margin-left:50%; margin-top:30px">4</h2>
+       <p style="margin-left:30px; margin-top:30px">Вивести сеанси та відповідні назви кінотеатрів</p>
+           <table class="table table-hover " style="margin:30px">
+               <tr>
+                   <thead>
+                   <th>ID</th>
+                   <th>Title</th>
+                   <th>Seats</th>
+                   <th>Seance</th>
+               </tr>
+                    {% for row in find_4 %}
+
+                     <tr>
+
+                          {% for i in row %}
+                        <td>{{i}}</td>
+                         {% endfor %}
+
+
+               </tr>
+               {% endfor %}
+           </table>
+       </div>
+ </div>
+     <div class="row">
+        <div class="col-md-6 " style="">
+                <h2 style="margin-left:50%; margin-top:30px">5</h2>
+       <p style="margin-left:30px; margin-top:30px">Bивести  сеанси та інформацію про кінотеатри в яких вони показуються (сорування за часом)</p>
+           <table class="table table-hover " style="margin:30px">
+               <tr>
+                   <thead>
+                   <th>ID</th>
+                   <th>Title</th>
+                   <th>Seats</th>
+                   <th>Seance_name</th>
+                   <th>Seance_time</th>
+                   <th>Seance_show</th>
+                   <th>Seance_about</th>
+
+               </tr>
+                    {% for row in find_5 %}
+
+                     <tr>
+
+                          {% for i in row %}
+                        <td>{{i}}</td>
+                         {% endfor %}
+
+
+               </tr>
+               {% endfor %}
+           </table>
+       </div>
+          <div class="col-md-3 " style="margin-left:50px;">
+                <h2 style="margin-left:50%; margin-top:30px">6</h2>
+       <p style="margin-left:30px; margin-top:30px">Вивести кінотеатри, де кількість мість більша середньої</p>
+           <table class="table table-hover " style="margin:30px">
+               <tr>
+                   <thead>
+                   <th>ID</th>
+                   <th>Title</th>
+                   <th>Seats</th>
+               </tr>
+                    {% for row in find_6 %}
+
+                     <tr>
+
+                          {% for i in row %}
+                        <td>{{i}}</td>
+                         {% endfor %}
+
+
+               </tr>
+               {% endfor %}
+           </table>
+       </div>
+   <div class="col-md-3 " style="margin-left:50px;">
+                <h2 style="margin-left:50%; margin-top:30px">7</h2>
+       <p style="margin-left:30px; margin-top:30px"> Вивести міста, де є кінотеатри кількість мість в яких більша середьої</p>
+           <table class="table table-hover " style="margin:30px">
+               <tr>
+                   <thead>
+                   <th>Country</th>
+                   <th>City_name</th>
+
+               </tr>
+                    {% for row in find_7 %}
+
+                     <tr>
+
+                          {% for i in row %}
+                        <td>{{i}}</td>
+                         {% endfor %}
+
+
+               </tr>
+               {% endfor %}
+           </table>
+       </div>
+
+
+
+    </div>
+
+</div>
+{% block update %}
+  {% endblock %}
+<style>
+    .my_bt{
+     margin-top:5%;
+    }
+
+    .my_div_bt{
+     margin-left:5%;
+     margin-top:2%;
+    }
+    p.res{
+    color:#828282;
+    }
+    .glyphicon-ok{
+    color:green;
+    }
+    .glyphicon-pencil{
+    color: #5c8dbc;
+    }
+    .glyphicon-pencil:hover{
+    color: #345b82;
+    }
+    .glyphicon-remove{
+    color:#d30a0a;
+    }
+    .glyphicon-remove:hover{
+    color:#7c0404;
+    }
+    .glyphicon-ok:hover{
+    color:#195e19;
+    }
+    a.btn{
+     width:200px;
+       }
+</style>
+
+
+
+
+
+
+</body>
+</html>
